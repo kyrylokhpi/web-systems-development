@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Створити акаунт</h1>
+                <p>Заповніть форму для реєстрації</p>
+            </div>
+            <form action="#" method="post" class="registration-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">Ім'я</label>
+                        <input type="text" id="first-name" name="first-name" placeholder="Кирило">
+                        <span class="error-message" id="first-name-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Прізвище</label>
+                        <input type="text" id="last-name" name="last-name" placeholder="Долинський">
+                        <span class="error-message" id="last-name-error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Електронна пошта</label>
+                    <input type="email" id="email" name="email" placeholder="example@mail.com">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder="Мінімум 8 символів">
+                    <span class="error-message" id="password-error"></span>
+                </div>
+                <button type="submit">Зареєструватися</button>
+            </form>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
