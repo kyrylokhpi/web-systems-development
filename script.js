@@ -85,4 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function isValidEmail(value) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     }
+
+    // Clear error styling as user types
+    form.querySelectorAll("input").forEach(function (input) {
+        input.addEventListener("input", function () {
+            input.classList.remove("input-error", "input-valid");
+            var errorEl = document.getElementById(input.id + "-error");
+            if (errorEl) errorEl.textContent = "";
+        });
+    });
 });
