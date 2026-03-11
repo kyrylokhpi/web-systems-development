@@ -15,11 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (firstName.value.trim() === "") {
             showError(firstName, "first-name-error", "Введіть ім'я");
             isValid = false;
+        } else {
+            markValid(firstName);
         }
 
         if (lastName.value.trim() === "") {
             showError(lastName, "last-name-error", "Введіть прізвище");
             isValid = false;
+        } else {
+            markValid(lastName);
         }
 
         if (email.value.trim() === "") {
@@ -28,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (!isValidEmail(email.value.trim())) {
             showError(email, "email-error", "Некоректний формат пошти");
             isValid = false;
+        } else {
+            markValid(email);
         }
 
         if (password.value === "") {
@@ -36,17 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (password.value.length < 8) {
             showError(password, "password-error", "Пароль має містити щонайменше 8 символів");
             isValid = false;
+        } else {
+            markValid(password);
         }
 
         if (isValid) {
             alert("Реєстрація успішна!");
             form.reset();
+            clearState();
         }
     });
 
     function showError(input, errorId, message) {
         input.classList.add("input-error");
         document.getElementById(errorId).textContent = message;
+    }
+
+    function markValid(input) {
+        input.classList.add("input-valid");
     }
 
     function clearErrors() {
@@ -58,6 +71,14 @@ document.addEventListener("DOMContentLoaded", function () {
         var inputs = form.querySelectorAll("input");
         inputs.forEach(function (input) {
             input.classList.remove("input-error");
+            input.classList.remove("input-valid");
+        });
+    }
+
+    function clearState() {
+        var inputs = form.querySelectorAll("input");
+        inputs.forEach(function (input) {
+            input.classList.remove("input-valid");
         });
     }
 

@@ -119,6 +119,11 @@ button[type="submit"]:active {
     background-color: #fef2f2 !important;
 }
 
+.input-valid {
+    border-color: #22c55e !important;
+    background-color: #f0fdf4 !important;
+}
+
 @media (max-width: 480px) {
     body {
         padding: 16px;
