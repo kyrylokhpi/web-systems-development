@@ -124,6 +124,13 @@ button[type="submit"]:active {
     background-color: #f0fdf4 !important;
 }
 
+footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+}
+
 @media (max-width: 480px) {
     body {
         padding: 16px;
