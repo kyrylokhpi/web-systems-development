@@ -165,6 +165,103 @@ router.del("/api/users/:id", async (ctx) => {
     ctx.status = 204;
 });
 
+// POST /api/posts — create post
+router.post("/api/posts", async (ctx) => {
+    const { title, content, userId } = ctx.request.body as any;
+
+    if (!title || !content || !userId) {
+        ctx.status = 400;
+        ctx.body = { error: "Усі поля обов'язкові" };
+        return;
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+        ctx.status = 404;
+        ctx.body = { error: "Користувача не знайдено" };
+        return;
+    }
+
+    const post = await prisma.post.create({
+        data: { title, content, userId },
+        include: { user: true },
+    });
+
+    ctx.status = 201;
+    ctx.body = {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        createdAt: post.createdAt,
+        author: post.user.firstName + " " + post.user.lastName,
+        userId: post.userId,
+    };
+});
+
+// GET /api/posts — list all posts
+router.get("/api/posts", async (ctx) => {
+    const posts = await prisma.post.findMany({
+        include: { user: true },
+        orderBy: { createdAt: "desc" },
+    });
+
+    ctx.body = posts.map((p) => ({
+        id: p.id,
+        title: p.title,
+        content: p.content,
+        createdAt: p.createdAt,
+        author: p.user.firstName + " " + p.user.lastName,
+        userId: p.userId,
+    }));
+});
+
+// PUT /api/posts/:id — update post
+router.put("/api/posts/:id", async (ctx) => {
+    const id = parseInt(ctx.params.id);
+    const { title, content } = ctx.request.body as any;
+
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) {
+        ctx.status = 404;
+        ctx.body = { error: "Пост не знайдено" };
+        return;
+    }
+
+    const data: any = {};
+    if (title) data.title = title;
+    if (content) data.content = content;
+
+    const post = await prisma.post.update({
+        where: { id },
+        data,
+        include: { user: true },
+    });
+
+    ctx.body = {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        createdAt: post.createdAt,
+        author: post.user.firstName + " " + post.user.lastName,
+        userId: post.userId,
+    };
+});
+
+// DELETE /api/posts/:id — delete post
+router.del("/api/posts/:id", async (ctx) => {
+    const id = parseInt(ctx.params.id);
+
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) {
+        ctx.status = 404;
+        ctx.body = { error: "Пост не знайдено" };
+        return;
+    }
+
+    await prisma.post.delete({ where: { id } });
+    ctx.status = 204;
+});
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 

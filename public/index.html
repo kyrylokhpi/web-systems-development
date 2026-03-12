@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Управління користувачами</title>
+    <title>Управління користувачами та постами</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
         <div class="form-card">
             <div class="form-header">
-                <h1 id="form-title">Створити акаунт</h1>
-                <p id="form-subtitle">Заповніть форму для реєстрації</p>
+                <h1 id="form-title">Новий користувач</h1>
+                <p id="form-subtitle">Створіть нового користувача</p>
             </div>
             <form class="registration-form">
                 <div class="form-row">
@@ -37,7 +37,7 @@
                     <span class="error-message" id="password-error"></span>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" id="submit-btn">Зареєструватися</button>
+                    <button type="submit" id="submit-btn">Створити</button>
                     <button type="button" id="cancel-btn" class="btn-cancel" style="display:none;">Скасувати</button>
                 </div>
             </form>
@@ -48,19 +48,59 @@
                 <h2>Користувачі</h2>
                 <input type="text" id="search" placeholder="Пошук...">
             </div>
-            <table class="users-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Ім'я</th>
-                        <th>Прізвище</th>
-                        <th>Пошта</th>
-                        <th>Дії</th>
-                    </tr>
-                </thead>
-                <tbody id="users-tbody"></tbody>
-            </table>
+            <div class="table-wrap">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ім'я</th>
+                            <th>Прізвище</th>
+                            <th>Пошта</th>
+                            <th>Дії</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody"></tbody>
+                </table>
+            </div>
             <p id="no-users" class="no-users">Користувачів не знайдено</p>
+        </div>
+
+        <div class="form-card" id="post-form-card">
+            <div class="form-header">
+                <h1 id="post-form-title">Новий пост</h1>
+                <p id="post-form-subtitle">Створіть пост від імені користувача</p>
+            </div>
+            <form id="post-form">
+                <div class="form-group">
+                    <label for="post-user">Автор</label>
+                    <select id="post-user" name="post-user">
+                        <option value="">Оберіть користувача...</option>
+                    </select>
+                    <span class="error-message" id="post-user-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="post-title">Заголовок</label>
+                    <input type="text" id="post-title" name="post-title" placeholder="Заголовок посту">
+                    <span class="error-message" id="post-title-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="post-content">Зміст</label>
+                    <textarea id="post-content" name="post-content" placeholder="Текст посту..." rows="4"></textarea>
+                    <span class="error-message" id="post-content-error"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="post-submit-btn">Опублікувати</button>
+                    <button type="button" id="post-cancel-btn" class="btn-cancel" style="display:none;">Скасувати</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="users-card">
+            <div class="users-header">
+                <h2>Пости</h2>
+            </div>
+            <div id="posts-list"></div>
+            <p id="no-posts" class="no-users">Постів не знайдено</p>
         </div>
     </main>
     <footer>
