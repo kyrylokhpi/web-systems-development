@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Реєстрація</title>
+    <title>Управління користувачами</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
         <div class="form-card">
             <div class="form-header">
-                <h1>Створити акаунт</h1>
-                <p>Заповніть форму для реєстрації</p>
+                <h1 id="form-title">Створити акаунт</h1>
+                <p id="form-subtitle">Заповніть форму для реєстрації</p>
             </div>
-            <form action="#" method="post" class="registration-form">
+            <form class="registration-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="first-name">Ім'я</label>
@@ -36,8 +36,31 @@
                     <input type="password" id="password" name="password" placeholder="Мінімум 8 символів">
                     <span class="error-message" id="password-error"></span>
                 </div>
-                <button type="submit">Зареєструватися</button>
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn">Зареєструватися</button>
+                    <button type="button" id="cancel-btn" class="btn-cancel" style="display:none;">Скасувати</button>
+                </div>
             </form>
+        </div>
+
+        <div class="users-card">
+            <div class="users-header">
+                <h2>Користувачі</h2>
+                <input type="text" id="search" placeholder="Пошук...">
+            </div>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ім'я</th>
+                        <th>Прізвище</th>
+                        <th>Пошта</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="users-tbody"></tbody>
+            </table>
+            <p id="no-users" class="no-users">Користувачів не знайдено</p>
         </div>
     </main>
     <footer>
